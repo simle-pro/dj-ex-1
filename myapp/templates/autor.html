@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Autors</h1>
+    {% for autor in autors %}
+    <h2>Autor_id {{autor.id}} </h2>
+    {{autor.firstn}} <br>
+    {{autor.lastn}}<br>
+    {{autor.birth_d}} <br>
+    {% endfor %}
+    
+<p>...</p>
+
+        <a href="{% url 'autors_create' %}"><button>add_autor</button></a>
+    <br>
+
+    
+
+    <br>
+</body>
+</html>

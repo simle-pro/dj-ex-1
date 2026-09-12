@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form method = "POST" >
+        {% csrf_token %}
+        <p>First name: <input type="text" name="firstn" required></p>
+        <p>Last name: <input type="text" name="lastn" required></p>
+        <p>Bitth day: <input type="text"  name="birth_d" required></p>
+        <button type="submit">Сохранить</button>
+            <a href="{% url 'autors' %}">Back</a>
+    </form>
+</body>
+</html>
