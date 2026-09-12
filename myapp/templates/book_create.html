@@ -10,15 +10,18 @@
         {% csrf_token %}
         <p>title: <input type="text" name="title" required></p>
 
-        <select name="Autor" id="">
-            <option value=""></option>
-        </select>
+<select name="Autor" required>
+    <option value="">-- Выберите автора --</option>
+    {% for autor in autors %}
+        <option value="{{ autor.id }}">{{ autor.firstn }} {{ autor.lastn }}</option>
+    {% endfor %}
+</select>
 
         <p>pages: <input type="text" name="pages" required></p>
 
         <p>price: <input type="number"  name="price" required></p>
 
-        <p>desc: <input type="number"  name="desc" required></p>
+        <p>desc: <input type="text"  name="desc" required></p>
 
 
         <button type="submit">Сохранить</button>

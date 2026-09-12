@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{ book.title }}</title>
 </head>
 <body>
-    <h1>Books</h1>
-    {% for book in books %}
-    {{book.title}} <br>
-    {{book.Autor}}<br>
-    {{book.pages}} <br>
-    {{book.price}} <br>
-    {{book.desc}} <br>
+    <h1>Book # {{ book.id }}</h1>
+    <p><strong>Title:</strong> {{ book.title }}</p>
+    <p><strong>Author:</strong> {{ book.Autor }}</p>
+    <p><strong>Pages:</strong> {{ book.pages }}</p>
+    <p><strong>Price:</strong> {{ book.price }}</p>
+    <p><strong>Description:</strong> {{ book.desc }}</p>
+
     <br>
-    {% endfor %}
-
-
+    <a href="{% url 'book' %}"><button>Back to Books</button></a>
 </body>
 </html>

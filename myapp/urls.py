@@ -5,5 +5,6 @@ urlpatterns = [
     path('', autors,name="autors"),
     path('autors_create/', autors_create, name='autors_create'),
     path('book', books, name='book'),
-    path('books_create/', book_create, name='books_create'),
+    path('book_create/', book_create, name='book_create'),
+    path('book/<int:id>/', details, name='details')
 ]
