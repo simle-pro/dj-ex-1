@@ -1,31 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Добавление книги</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+            color: #333;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .card h2 {
+            margin-bottom: 24px;
+            font-size: 24px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            background-color: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
+            gap: 12px;
+        }
+
+        .btn-submit {
+            flex: 1;
+            background-color: #3182ce;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #2b6cb0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 18px;
+            background-color: #edf2f7;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
 </head>
 <body>
-<form method = "POST" >
-        {% csrf_token %}
-        <p>title: <input type="text" name="title" required></p>
 
-<select name="Autor" required>
-    <option value="">-- Выберите автора --</option>
-    {% for autor in autors %}
-        <option value="{{ autor.id }}">{{ autor.firstn }} {{ autor.lastn }}</option>
-    {% endfor %}
-</select>
+    <div class="card">
+        <h2>Добавить книгу</h2>
+        <form method="POST">
+            {% csrf_token %}
 
-        <p>pages: <input type="text" name="pages" required></p>
+            <div class="form-group">
+                <label for="title">Название книги (Title)</label>
+                <input type="text" id="title" name="title" placeholder="Введите название" required>
+            </div>
 
-        <p>price: <input type="number"  name="price" required></p>
+            <div class="form-group">
+                <label for="Autor">Автор (Author)</label>
+                <select id="Autor" name="Autor" required>
+                    <option value="">-- Выберите автора --</option>
+                    {% for autor in autors %}
+                        <option value="{{ autor.id }}">{{ autor.firstn }} {{ autor.lastn }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <p>desc: <input type="text"  name="desc" required></p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pages">Страницы (Pages)</label>
+                    <input type="number" id="pages" name="pages" placeholder="300" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="price">Цена (Price)</label>
+                    <input type="number" id="price" name="price" placeholder="1000" required>
+                </div>
+            </div>
 
-        <button type="submit">Сохранить</button>
-            <a href="{% url 'book' %}">Back</a>
-    </form>
+            <div class="form-group">
+                <label for="desc">Описание (Description)</label>
+                <textarea id="desc" name="desc" placeholder="Краткое описание книги..." required></textarea>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-submit">Сохранить</button>
+                <a href="{% url 'book' %}" class="btn-back">Back</a>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

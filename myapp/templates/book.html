@@ -1,24 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Список книг</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: #3182ce;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2b6cb0;
+        }
+
+        .btn-secondary {
+            background-color: #edf2f7;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-id {
+            align-self: flex-start;
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .book-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .book-author {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 16px;
+        }
+
+        .book-actions {
+            margin-top: auto;
+        }
+
+        .btn-watch {
+            display: block;
+            text-align: center;
+            background-color: #edf2f7;
+            color: #2b6cb0;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-watch:hover {
+            background-color: #e2e8f0;
+        }
+
+        .empty-state {
+            background: #ffffff;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #718096;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 <body>
-    <h1>Books</h1>
-    {% for book in books %}
-    <h2>Book# {{book.id}}</h2>
-    {{book.title}} <br>
-    {{book.Autor}}<br>
-    <a href="{% url 'details' book.id %}">Watch</a>
-    {% endfor %}
 
-    <p>...</p>
-    <br>
-    <a href="{% url 'book_create' %}"><button>create_book</button></a>
-    
+    <div class="header">
+        <h1>Книги</h1>
+        <div class="nav-buttons">
+            <a href="{% url 'book_create' %}" class="btn btn-primary">+ Добавить книгу</a>
+            <a href="{% url 'autors' %}" class="btn btn-secondary">Авторы</a>
+        </div>
+    </div>
 
+    {% if books %}
+        <div class="books-grid">
+            {% for book in books %}
+                <div class="book-card">
+                    <div>
+                        <div class="book-id">Book #{{ book.id }}</div>
+                        <div class="book-title">{{ book.title }}</div>
+                        <div class="book-author">✍️ {{ book.Autor }}</div>
+                    </div>
+                    <div class="book-actions">
+                        <a href="{% url 'details' book.id %}" class="btn-watch">Watch</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>Список книг пока пуст.</p>
+        </div>
+    {% endif %}
 
 </body>
 </html>

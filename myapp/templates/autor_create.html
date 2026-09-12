@@ -1,18 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Добавление автора</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .card h2 {
+            margin-bottom: 24px;
+            font-size: 24px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
+            gap: 12px;
+        }
+
+        .btn-submit {
+            flex: 1;
+            background-color: #3182ce;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #2b6cb0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 18px;
+            background-color: #edf2f7;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
 </head>
 <body>
-<form method = "POST" >
-        {% csrf_token %}
-        <p>First name: <input type="text" name="firstn" required></p>
-        <p>Last name: <input type="text" name="lastn" required></p>
-        <p>Bitth day: <input type="text"  name="birth_d" required></p>
-        <button type="submit">Сохранить</button>
-            <a href="{% url 'autors' %}">Back</a>
-    </form>
+
+    <div class="card">
+        <h2>Добавить автора</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="firstn">First Name</label>
+                <input type="text" id="firstn" name="firstn" placeholder="Имя" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastn">Last Name</label>
+                <input type="text" id="lastn" name="lastn" placeholder="Фамилия" required>
+            </div>
+
+            <div class="form-group">
+                <label for="birth_d">Birth Day</label>
+                <input type="date" id="birth_d" name="birth_d" required>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-submit">Сохранить</button>
+                <a href="{% url 'autors' %}" class="btn-back">Back</a>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
