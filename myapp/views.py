@@ -53,3 +53,8 @@ def book_update(request, id):
         return redirect('details', id=book.id)
     autors = Autor.objects.all()
     return render(request, 'book_update.html', {'book': book, 'autors': autors})
+
+
+def book_delete(request, id):
+    Book.objects.get(id=id).delete()
+    return redirect('book')

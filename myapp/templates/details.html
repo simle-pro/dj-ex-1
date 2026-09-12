@@ -15,7 +15,16 @@
 
     <br>
     <a href="{% url 'book_update' book.id %}"><button>Update</button></a>
+
+    <br>
+        <form method="POST" action="{% url 'book_delete' book.id %}">
+        {% csrf_token %}
+        <button type="submit">dalate</button>
+    </form>
+
     <br>
     <a href="{% url 'book' %}"><button>Back to Books</button></a>
+
+
 </body>
 </html>
