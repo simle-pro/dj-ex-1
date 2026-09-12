@@ -41,3 +41,15 @@ def details(request, id):
     book = Book.objects.get(id=id)
     return render(request, 'details.html', {'book': book})
 
+def book_update(request, id):
+    book = Book.objects.get(id=id)
+    if request.method == 'POST':
+        book.title = request.POST.get('title')
+        book.Autor_id = request.POST.get('Autor')
+        book.pages = request.POST.get('pages')
+        book.price = request.POST.get('price')
+        book.desc = request.POST.get('desc')
+        book.save()
+        return redirect('details', id=book.id)
+    autors = Autor.objects.all()
+    return render(request, 'book_update.html', {'book': book, 'autors': autors})
